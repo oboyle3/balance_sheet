@@ -1,0 +1,94 @@
+<h1>SIRR Scenario Simulator</h1>
+
+<p>
+    Select a scenario from the database to see its assumptions
+    and calculate its net spread.
+</p>
+
+<form method="POST">
+
+    {% csrf_token %}
+
+    {{ form.as_p }}
+
+    <button type="submit">
+        Calculate Scenario
+    </button>
+
+</form>
+
+
+{% if scenario %}
+
+    <hr>
+
+    <h2>{{ scenario.product_name }}</h2>
+
+    <p>
+        <strong>Coupon Rate:</strong>
+        {{ scenario.coupon_rate }}%
+        <br>
+        <small>
+            The interest rate charged to the borrower on the loan.
+        </small>
+    </p>
+
+    <p>
+        <strong>Funding Cost:</strong>
+        {{ scenario.funding_cost }}%
+        <br>
+        <small>
+            The cost of obtaining the money used to fund the loan.
+        </small>
+    </p>
+
+    <p>
+        <strong>Credit Loss:</strong>
+        {{ scenario.credit_loss }}%
+        <br>
+        <small>
+            The estimated percentage of the loan that may be lost
+            because some borrowers do not repay.
+        </small>
+    </p>
+
+    <p>
+        <strong>Servicing Cost:</strong>
+        {{ scenario.servicing_cost }}%
+        <br>
+        <small>
+            The cost of managing the loan, such as collecting
+            payments and maintaining records.
+        </small>
+    </p>
+
+    <p>
+        <strong>Target Margin:</strong>
+        {{ scenario.target_margin }}%
+        <br>
+        <small>
+            The minimum profit margin you want the loan to generate
+            after the other costs.
+        </small>
+    </p>
+
+{% endif %}
+
+
+{% if result is not None %}
+
+    <hr>
+
+    <h2>Results</h2>
+
+    <p>
+        <strong>Net Spread:</strong>
+        {{ result }}%
+    </p>
+
+    <small>
+        Net Spread is the coupon rate remaining after subtracting
+        funding, credit loss, and servicing costs.
+    </small>
+
+{% endif %}
