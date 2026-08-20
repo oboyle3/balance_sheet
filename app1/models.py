@@ -45,3 +45,7 @@ class SIRRScenario(models.Model):
     credit_loss = models.DecimalField(max_digits=5, decimal_places=2)
     servicing_cost = models.DecimalField(max_digits=5, decimal_places=2)
     target_margin = models.DecimalField(max_digits=5, decimal_places=2)
+
+
+class Library(models.Model):
+    state = models.CharField
